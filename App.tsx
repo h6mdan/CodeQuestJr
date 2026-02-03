@@ -81,7 +81,7 @@ const playSound = (type: 'execute' | 'collect' | 'success' | 'start' | 'error' |
   }
 };
 
-const LOGO_URL = "https://raw.githubusercontent.com/google-gemini/million-coders/main/logo.png";
+const LOGO_URL = "/Million-Coders-White-text.svg";
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'menu' | 'game'>('menu');

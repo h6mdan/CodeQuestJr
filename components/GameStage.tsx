@@ -1,6 +1,27 @@
 
 import React from 'react';
 import { GameState, Level } from '../types';
+const THEME_STYLES = {
+  space: {
+    bg: "bg-[#0b0e14]",
+    border: "border-indigo-500",
+    accent: "${theme.accent}",
+    hud: "${theme.hud}",
+  },
+  ocean: {
+    bg: "bg-blue-950",
+    border: "border-cyan-500",
+    accent: "text-cyan-400",
+    hud: "bg-blue-900/60",
+  },
+  jungle: {
+    bg: "bg-green-950",
+    border: "border-emerald-500",
+    accent: "text-emerald-400",
+    hud: "bg-green-900/60",
+  },
+};
+
 
 interface GameStageProps {
   state: GameState;
@@ -9,11 +30,16 @@ interface GameStageProps {
 }
 
 const GameStage: React.FC<GameStageProps> = ({ state, level, onNextLevel }) => {
+  const theme = THEME_STYLES[level.theme] || THEME_STYLES.space;
+
   // Generate grid lines every 10 units
   const gridLines = Array.from({ length: 11 }, (_, i) => i * 10);
 
   return (
-    <div className="relative w-full h-full bg-[#0b0e14] rounded-3xl overflow-hidden border-4 border-indigo-500 shadow-2xl">
+    <div
+  className={`relative w-full h-full ${theme.bg} rounded-3xl overflow-hidden border-4 ${theme.border} shadow-2xl`}
+>
+
       {/* Space Background with subtle stars */}
       <div className="absolute inset-0 opacity-20">
         {[...Array(30)].map((_, i) => (
@@ -49,13 +75,13 @@ const GameStage: React.FC<GameStageProps> = ({ state, level, onNextLevel }) => {
             {line % 20 === 0 && (
               <>
                 <span 
-                  className="absolute text-[10px] text-indigo-400 font-mono opacity-40 select-none"
+                  className="absolute text-[10px] ${theme.accent} font-mono opacity-40 select-none"
                   style={{ left: `${line}%`, bottom: '4px', transform: 'translateX(-50%)' }}
                 >
                   {line}
                 </span>
                 <span 
-                  className="absolute text-[10px] text-indigo-400 font-mono opacity-40 select-none"
+                  className="absolute text-[10px] ${theme.accent} font-mono opacity-40 select-none"
                   style={{ top: `${line}%`, left: '4px', transform: 'translateY(-50%)' }}
                 >
                   {100 - line}
@@ -101,7 +127,7 @@ const GameStage: React.FC<GameStageProps> = ({ state, level, onNextLevel }) => {
 
       {/* HUD Info */}
       <div className="absolute top-4 left-4 flex gap-2 z-30">
-        <div className="bg-indigo-900/60 backdrop-blur-md text-white px-4 py-2 rounded-2xl shadow-lg border border-white/10 flex items-center gap-2">
+        <div className="${theme.hud} backdrop-blur-md text-white px-4 py-2 rounded-2xl shadow-lg border border-white/10 flex items-center gap-2">
            <span className="text-yellow-400 font-bold">⭐</span>
            <span className="font-mono text-xl">{state.score}</span>
         </div>

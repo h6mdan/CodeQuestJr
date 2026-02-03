@@ -457,7 +457,12 @@ const App: React.FC = () => {
         </div>
         <div className="lg:col-span-7 flex flex-col gap-6">
            <div className="flex-1 relative">
-             <GameStage state={gameState} theme={currentLevel.theme} onNextLevel={handleNextLevel} />
+             <GameStage
+  state={gameState}
+  level={currentLevel}
+  onNextLevel={handleNextLevel}
+/>
+
            </div>
            <div className="flex gap-4 p-3 bg-slate-800/50 rounded-3xl border border-slate-700/50 backdrop-blur-sm shadow-2xl">
              <button onClick={executeCode} disabled={gameState.isRunning || blocks.length === 0} className={`flex-1 flex items-center justify-center gap-3 py-4 rounded-2xl text-xl font-bold transition-all shadow-lg active:scale-95 ${gameState.isRunning || blocks.length === 0 ? 'bg-slate-700 text-slate-500 cursor-not-allowed border-b-4 border-slate-900' : 'bg-green-500 hover:bg-green-400 text-white border-b-4 border-green-700 shadow-green-500/20'}`}>{gameState.isRunning ? 'Running...' : 'Run Code ▶️'}</button>

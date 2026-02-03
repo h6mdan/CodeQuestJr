@@ -30,7 +30,8 @@ interface GameStageProps {
 }
 
 const GameStage: React.FC<GameStageProps> = ({ state, level, onNextLevel }) => {
-  const theme = THEME_STYLES[level.theme] || THEME_STYLES.space;
+  const theme = THEME_STYLES[level?.theme] || THEME_STYLES.space;
+
 
   // Generate grid lines every 10 units
   const gridLines = Array.from({ length: 11 }, (_, i) => i * 10);
